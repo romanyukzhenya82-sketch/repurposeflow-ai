@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RepurposeFlow AI — Один текст → весь контент за 30 секунд</title>
+<meta name="description" content="Превращай любой текст в контент для X, LinkedIn, Instagram, TikTok, YouTube и email за 30 секунд. 5 бесплатных репурпозов в день. Безлимит за $19/мес.">
+<meta property="og:title" content="RepurposeFlow AI — Один текст → весь контент">
+<meta property="og:description" content="Экономь 4–6 часов в неделю. 5 бесплатных репурпозов каждый день.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#06080f;
+  color:#eef0f8;
+  overflow-x:hidden;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+
+:root{
+  --accent:#ff4d1c;
+  --gold:#f5c842;
+  --green:#4ade80;
+  --surface:#0e1120;
+  --surface2:#141828;
+  --border:rgba(255,255,255,0.07);
+  --muted:#8890b0;
+  --text:#eef0f8;
+}
+
+/* Orbs */
+.orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(140px)}
+.orb-1{width:700px;height:700px;background:rgba(255,77,28,0.10);top:-280px;right:-140px;animation:drift 18s ease-in-out infinite alternate}
+.orb-2{width:600px;height:600px;background:rgba(90,60,220,0.07);bottom:-200px;left:-180px;animation:drift 22s ease-in-out infinite alternate-reverse}
+.orb-3{width:450px;height:450px;background:rgba(245,200,66,0.06);top:42%;left:35%;animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(30px,40px)}}
+
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.5;
+}
+
+.wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 24px}
+section{position:relative;z-index:1}
+
+/* Scroll reveal */
+.sr{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.sr.in{opacity:1;transform:translateY(0)}
+.sr-d1{transition-delay:.1s}.sr-d2{transition-delay:.2s}.sr-d3{transition-delay:.3s}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:200;
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(24px) saturate(160%);
+  background:rgba(6,8,15,0.78);
+}
+.nav-inner{
+  max-width:880px;margin:0 auto;padding:0 24px;
+  height:58px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:17px;letter-spacing:-0.4px;
+  background:linear-gradient(130deg,#fff 40%,#c8cfff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  white-space:nowrap;
+}
+.nav-live{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--accent);background:rgba(255,77,28,0.12);
+  border:1px solid rgba(255,77,28,0.28);
+  padding:4px 10px;border-radius:20px;
+}
+.nav-live::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);
+  animation:blink 1.4s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.nav-btn{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:13px;
+  background:var(--accent);color:#fff;
+  padding:8px 18px;border-radius:8px;
+  transition:filter .2s,transform .15s;white-space:nowrap;
+}
+.nav-btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
+
+/* HERO */
+.hero{padding:88px 0 64px;text-align:center}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--accent);background:rgba(255,77,28,0.10);
+  border:1px solid rgba(255,77,28,0.25);
+  padding:6px 16px;border-radius:30px;margin-bottom:28px;
+  animation:fadeUp .55s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.hero h1{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(44px,9vw,82px);line-height:1.0;letter-spacing:-3px;
+  background:linear-gradient(155deg,#fff 35%,#b8c2f0 80%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:4px;
+  animation:fadeUp .55s .08s ease both;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(130deg,var(--accent),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+.hero-headline{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:clamp(20px,3.8vw,32px);line-height:1.25;
+  color:#d0d6f4;margin-bottom:10px;
+  animation:fadeUp .55s .15s ease both;
+}
+
+.hero-sub{
+  font-size:clamp(15px,2.2vw,17px);color:var(--muted);
+  max-width:560px;margin:0 auto 32px;
+  animation:fadeUp .55s .22s ease both;
+}
+.hero-sub strong{color:#c8cfff}
+
+/* Offer */
+.offer{
+  display:inline-flex;flex-wrap:wrap;gap:10px;justify-content:center;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:18px 24px;margin-bottom:32px;
+  animation:fadeUp .55s .28s ease both;
+}
+.pill{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500}
+.pill-badge{
+  font-weight:700;font-size:12px;letter-spacing:.04em;
+  padding:3px 10px;border-radius:20px;white-space:nowrap;
+}
+.pb-green{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.25)}
+.pb-gold{background:rgba(245,200,66,.10);color:var(--gold);border:1px solid rgba(245,200,66,.25)}
+
+/* CTA button */
+.btn-cta{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:18px;
+  color:#fff;
+  background:linear-gradient(135deg,#ff5526 0%,var(--accent) 50%,#e0390d 100%);
+  padding:18px 44px;border-radius:14px;
+  box-shadow:0 8px 44px rgba(255,77,28,.42),0 2px 10px rgba(255,77,28,.18);
+  transition:transform .2s,box-shadow .2s,filter .2s;
+  position:relative;overflow:hidden;
+  animation:fadeUp .55s .35s ease both;
+  border:none;cursor:pointer;
+}
+.btn-cta::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.18) 0%,transparent 55%);
+  pointer-events:none;
+}
+.btn-cta::after{
+  content:'';position:absolute;
+  inset:-100%;background:rgba(255,255,255,.12);
+  transform:rotate(30deg) translateX(-100%);
+  transition:transform .6s ease;
+}
+.btn-cta:hover::after{transform:rotate(30deg) translateX(250%)}
+.btn-cta:hover{
+  transform:translateY(-3px) scale(1.025);
+  box-shadow:0 18px 60px rgba(255,77,28,.52),0 4px 18px rgba(255,77,28,.22);
+}
+.btn-cta:active{transform:translateY(0) scale(.98)}
+
+.cta-note{font-size:13px;color:var(--muted);margin-top:12px;animation:fadeUp .55s .42s ease both}
+
+.urgency{
+  display:inline-block;margin-top:14px;
+  font-size:13px;font-weight:600;
+  background:rgba(245,200,66,.08);color:var(--gold);
+  border:1px solid rgba(245,200,66,.22);
+  padding:6px 14px;border-radius:30px;
+  animation:fadeUp .55s .48s ease both;
+}
+
+/* Platforms */
+.platforms{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  margin-top:44px;padding-top:36px;
+  border-top:1px solid var(--border);
+  animation:fadeUp .55s .54s ease both;
+}
+.plat{
+  display:flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:500;color:var(--muted);
+  background:var(--surface2);border:1px solid var(--border);
+  padding:7px 14px;border-radius:40px;
+  transition:color .2s,border-color .2s,transform .2s;
+}
+.plat:hover{color:var(--text);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
+
+/* Sections */
+.section{padding:80px 0}
+.sec-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.sec-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(26px,5vw,42px);line-height:1.1;letter-spacing:-1px;
+  color:var(--text);margin-bottom:14px;
+}
+.sec-desc{font-size:16px;color:var(--muted);max-width:520px;line-height:1.7}
+.sec-head{margin-bottom:44px}
+
+/* Steps */
+.steps{display:flex;flex-direction:column;gap:3px}
+.step{
+  display:grid;grid-template-columns:60px 1fr;gap:20px;align-items:start;
+  background:var(--surface);border:1px solid var(--border);
+  padding:26px 28px;
+  position:relative;overflow:hidden;
+  transition:background .2s,border-color .2s;
+}
+.step:first-child{border-radius:16px 16px 4px 4px}
+.step:last-child{border-radius:4px 4px 16px 16px}
+.step:not(:first-child):not(:last-child){border-radius:4px}
+.step::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom,var(--accent),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.step:hover{background:var(--surface2);border-color:rgba(255,77,28,.18)}
+.step:hover::before{opacity:1}
+.step-num{
+  width:48px;height:48px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
+  background:linear-gradient(135deg,var(--accent) 0%,var(--gold) 100%);
+  border-radius:12px;color:#fff;
+  box-shadow:0 4px 18px rgba(255,77,28,.28);
+}
+.step-body h3{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:5px;color:var(--text)}
+.step-body p{font-size:14px;color:var(--muted);line-height:1.65}
+
+/* Features */
+.features{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:580px){.features{grid-template-columns:1fr}}
+.feat{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:24px;
+  transition:border-color .25s,transform .25s;
+}
+.feat:hover{border-color:rgba(255,77,28,.22);transform:translateY(-3px)}
+.feat-icon{font-size:30px;margin-bottom:14px;line-height:1}
+.feat h3{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:8px}
+.feat p{font-size:14px;color:var(--muted);line-height:1.65}
+
+/* Reviews */
+.reviews{display:flex;flex-direction:column;gap:14px}
+.review{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;padding:22px 26px;
+  border-left:3px solid var(--accent);
+  transition:border-left-color .25s,background .25s;
+}
+.review:hover{border-left-color:var(--gold);background:var(--surface2)}
+.review q{
+  display:block;font-size:15px;font-style:italic;
+  color:var(--text);margin-bottom:10px;line-height:1.7;quotes:none;
+}
+.review q::before{content:'\201C';font-size:38px;color:var(--accent);line-height:.4;vertical-align:-.35em;margin-right:3px;font-style:normal}
+.review cite{font-size:13px;color:var(--muted);font-style:normal;font-weight:500}
+.review-stars{color:var(--gold);font-size:14px;margin-bottom:10px;letter-spacing:2px}
+
+/* Guarantee */
+.guarantee-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:36px 40px;
+  display:flex;gap:24px;align-items:flex-start;
+  margin-top:80px;transition:border-color .25s;
+}
+.guarantee-box:hover{border-color:rgba(74,222,128,.25)}
+@media(max-width:520px){.guarantee-box{flex-direction:column;padding:24px}}
+.g-icon{font-size:52px;flex-shrink:0;line-height:1}
+.g-body h3{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;margin-bottom:8px;color:var(--green)}
+.g-body p{font-size:15px;color:var(--muted);line-height:1.7}
+
+/* Pricing */
+.pricing{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:44px}
+@media(max-width:560px){.pricing{grid-template-columns:1fr}}
+.price-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:18px;padding:28px 26px;
+  transition:border-color .25s,transform .25s;
+}
+.price-card.featured{
+  border-color:rgba(255,77,28,.35);
+  background:linear-gradient(145deg,rgba(255,77,28,.05) 0%,var(--surface) 60%);
+}
+.price-card:hover{transform:translateY(-3px)}
+.pc-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.pc-price{font-family:'Syne',sans-serif;font-weight:800;font-size:36px;color:var(--text);line-height:1;margin-bottom:4px}
+.pc-price sup{font-size:20px;vertical-align:super}
+.pc-price span{font-size:15px;font-weight:400;color:var(--muted)}
+.pc-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
+.pc-list{list-style:none;font-size:14px;color:var(--muted);display:flex;flex-direction:column;gap:8px}
+.pc-list li::before{content:'✓ ';color:var(--green);font-weight:700}
+.pc-list li.dim::before{content:'— ';color:var(--muted)}
+.pc-list li.dim{color:rgba(136,144,176,.4)}
+.pc-popular{
+  display:inline-block;margin-bottom:10px;
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  background:rgba(255,77,28,.15);color:var(--accent);
+  border:1px solid rgba(255,77,28,.3);
+  padding:3px 10px;border-radius:20px;
+}
+.pc-btn{
+  display:block;text-align:center;margin-top:22px;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:14px;
+  padding:13px 20px;border-radius:10px;
+  transition:filter .2s,transform .15s;
+}
+.pc-btn-free{background:var(--surface2);border:1px solid var(--border);color:var(--text)}
+.pc-btn-free:hover{border-color:rgba(255,255,255,.2);filter:brightness(1.3)}
+.pc-btn-paid{
+  background:linear-gradient(135deg,var(--accent) 0%,#e0390d 100%);
+  color:#fff;box-shadow:0 6px 28px rgba(255,77,28,.35);
+}
+.pc-btn-paid:hover{filter:brightness(1.1);transform:translateY(-2px)}
+
+/* Bottom CTA */
+.cta-section{text-align:center;padding:96px 0 80px;position:relative}
+.cta-glow{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:700px;height:300px;pointer-events:none;
+  background:radial-gradient(ellipse,rgba(255,77,28,.1) 0%,transparent 68%);
+}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:17px;
+  color:#0a0a0a;
+  background:linear-gradient(135deg,var(--gold),#f0a800);
+  padding:17px 40px;border-radius:14px;
+  box-shadow:0 8px 44px rgba(245,200,66,.32);
+  transition:transform .2s,box-shadow .2s;
+  position:relative;overflow:hidden;
+}
+.btn-gold::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.25) 0%,transparent 55%);
+  pointer-events:none;
+}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 18px 60px rgba(245,200,66,.44)}
+.cta-or{font-size:13px;color:var(--muted);margin:14px 0}
+.trust-line{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:16px;
+  margin-top:20px;font-size:13px;color:var(--muted);
+}
+.trust-line span{display:flex;align-items:center;gap:5px}
+
+/* Footer */
+footer{
+  border-top:1px solid var(--border);
+  padding:24px;text-align:center;
+  font-size:13px;color:var(--muted);
+  position:relative;z-index:1;
+}
+footer a{color:var(--accent);transition:opacity .2s}
+footer a:hover{opacity:.75}
+
+@media(max-width:640px){
+  .nav-live{display:none}
+  .hero{padding:64px 0 48px}
+  .section{padding:60px 0}
+  .step{grid-template-columns:48px 1fr;padding:20px}
+  .guarantee-box{padding:24px 22px}
+  .btn-cta{font-size:16px;padding:16px 28px}
+}
+</style>
+</head>
+<body>
+
+<div class="orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">RepurposeFlow AI</div>
+    <div class="nav-live">LIVE</div>
+    <a href="https://repurposeflow-ai-kfccxjihdjf7ybuyeeeqd.streamlit.app/" target="_blank" rel="noopener" class="nav-btn">Попробовать →</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">⚡ Powered by Groq · Запущен 24 марта 2026</div>
+  <h1>Repurpose<em>Flow</em> AI</h1>
+  <div class="hero-headline">Один текст → весь твой контент за 30 секунд</div>
+  <p class="hero-sub">
+    Больше не нужно вручную переписывать одну и ту же статью под
+    <strong>X, LinkedIn, Instagram, TikTok, YouTube</strong> и рассылки.
+    Экономь <strong>4–6 часов каждую неделю</strong>.
+  </p>
+
+  <div class="offer">
+    <div class="pill">
+      <span class="pill-badge pb-green">✅ БЕСПЛАТНО</span>
+      <span>5 репурпозов каждый день — навсегда</span>
+    </div>
+    <div class="pill">
+      <span class="pill-badge pb-gold">💰 $19 / мес</span>
+      <span>Unlimited + история + приоритет</span>
+    </div>
+  </div>
+
+  <a href="https://repurposeflow-ai-kfccxjihdjf7ybuyeeeqd.streamlit.app/" target="_blank" rel="noopener" class="btn-cta">
+    🚀 Попробовать бесплатно прямо сейчас
+  </a>
+  <div class="cta-note">Без регистрации · Без кредитки · Мгновенный доступ</div>
+  <div class="urgency">🔥 Уже десятки солопренёров экономят часы каждую неделю</div>
+
+  <div class="platforms">
+    <div class="plat">𝕏 Twitter / X</div>
+    <div class="plat">💼 LinkedIn</div>
+    <div class="plat">📸 Instagram</div>
+    <div class="plat">🎵 TikTok</div>
+    <div class="plat">▶ YouTube</div>
+    <div class="plat">✉ Email / Newsletter</div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section sr">
+  <div class="sec-head">
+    <div class="sec-label">Как это работает</div>
+    <h2 class="sec-title">Три шага. Никаких лишних движений.</h2>
+    <p class="sec-desc">Никакой магии — просто умный AI, который знает правила каждой платформы.</p>
+  </div>
+  <div class="steps">
+    <div class="step sr sr-d1">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Вставь любой текст</h3>
+        <p>Статья, транскрипт подкаста, голосовая заметка, идея, тред — всё подойдёт. Просто вставь и нажми кнопку.</p>
+      </div>
+    </div>
+    <div class="step sr sr-d2">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Выбери нужные платформы</h3>
+        <p>X, LinkedIn, Instagram, TikTok, YouTube, Email — выбирай всё сразу или только нужные. Каждый формат адаптируется автоматически.</p>
+      </div>
+    </div>
+    <div class="step sr sr-d3">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Получи готовый контент</h3>
+        <p>Мощные хуки, правильные эмодзи, хэштеги и призывы к действию — всё уже написано. Копируй и публикуй прямо сейчас.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section sr">
+  <div class="sec-head">
+    <div class="sec-label">Почему выбирают нас</div>
+    <h2 class="sec-title">Создан для тех, кто ценит время</h2>
+    <p class="sec-desc">Солопренёры и малый бизнес уже переключились. Вот почему.</p>
+  </div>
+  <div class="features">
+    <div class="feat sr sr-d1">
+      <div class="feat-icon">⏱</div>
+      <h3>Десятки часов в месяц</h3>
+      <p>Один раз написал — остальное делает AI. Больше времени на продукт, продажи и отдых.</p>
+    </div>
+    <div class="feat sr sr-d2">
+      <div class="feat-icon">🎨</div>
+      <h3>Единый стиль бренда</h3>
+      <p>Контент всегда звучит как ты. Никакого безликого корпоративного языка — только твой голос.</p>
+    </div>
+    <div class="feat sr sr-d3">
+      <div class="feat-icon">⚡</div>
+      <h3>Мгновенно на Groq</h3>
+      <p>Groq — самая быстрая LLM-инфраструктура. Результат за секунды, не минуты.</p>
+    </div>
+    <div class="feat sr sr-d1">
+      <div class="feat-icon">🔑</div>
+      <h3>Твой ключ — твои расходы</h3>
+      <p>Не нужен ChatGPT или Claude. Используй свой бесплатный Groq API ключ — плати только $19 за безлимит.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section sr">
+  <div class="sec-head">
+    <div class="sec-label">Цены</div>
+    <h2 class="sec-title">Просто. Без сюрпризов.</h2>
+    <p class="sec-desc">Бесплатно — навсегда. Безлимит — когда дорастёшь до масштаба.</p>
+  </div>
+  <div class="pricing">
+    <div class="price-card sr sr-d1">
+      <div class="pc-label">Старт</div>
+      <div class="pc-price">$0</div>
+      <div class="pc-sub">навсегда бесплатно</div>
+      <ul class="pc-list">
+        <li>5 репурпозов в день</li>
+        <li>Все 6 платформ</li>
+        <li>Groq-скорость</li>
+        <li class="dim">История репурпозов</li>
+        <li class="dim">Приоритетный доступ</li>
+      </ul>
+      <a href="https://repurposeflow-ai-kfccxjihdjf7ybuyeeeqd.streamlit.app/" target="_blank" rel="noopener" class="pc-btn pc-btn-free">Начать бесплатно →</a>
+    </div>
+    <div class="price-card featured sr sr-d2">
+      <div class="pc-popular">🔥 Популярный</div>
+      <div class="pc-label">Unlimited</div>
+      <div class="pc-price"><sup>$</sup>19<span> / мес</span></div>
+      <div class="pc-sub">14-дневная гарантия возврата</div>
+      <ul class="pc-list">
+        <li>Безлимитные репурпозы</li>
+        <li>Все 6 платформ</li>
+        <li>Groq-скорость</li>
+        <li>История всех репурпозов</li>
+        <li>Приоритетный доступ</li>
+      </ul>
+      <a href="https://buy.stripe.com/bJeeVdbdi9T1fHheZ9aVa00" target="_blank" rel="noopener" class="pc-btn pc-btn-paid">💰 Купить Unlimited →</a>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section sr">
+  <div class="sec-head">
+    <div class="sec-label">Отзывы</div>
+    <h2 class="sec-title">Что говорят первые пользователи</h2>
+  </div>
+  <div class="reviews">
+    <div class="review sr sr-d1">
+      <div class="review-stars">★★★★★</div>
+      <q>Наконец-то инструмент, который реально экономит часы каждый день! Один черновик — и сразу 6 постов под разные платформы. Не нужно думать о форматировании.</q>
+      <cite>— @solopreneur_ru</cite>
+    </div>
+    <div class="review sr sr-d2">
+      <div class="review-stars">★★★★★</div>
+      <q>Перестал тратить вечера на адаптацию контента под разные площадки. Раньше это занимало 3 часа, теперь — 3 минуты. Очень рекомендую!</q>
+      <cite>— Алексей, владелец малого бизнеса</cite>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<div class="guarantee-box sr">
+  <div class="g-icon">🛡️</div>
+  <div class="g-body">
+    <h3>14-дневная гарантия возврата денег</h3>
+    <p>Если после покупки Unlimited инструмент не оправдает ожиданий — просто напиши мне. Верну 100 % без лишних вопросов. Никакого риска с твоей стороны.</p>
+  </div>
+</div>
+
+<!-- BOTTOM CTA -->
+<section class="cta-section sr">
+  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="sec-label" style="margin-bottom:12px">Готов начать?</div>
+  <h2 class="sec-title">Сэкономь первые 4 часа уже сегодня</h2>
+  <p class="sec-desc" style="margin:0 auto 36px">Попробуй бесплатно — никакой регистрации. Хочешь безлимит? Один клик.</p>
+
+  <a href="https://repurposeflow-ai-kfccxjihdjf7ybuyeeeqd.streamlit.app/" target="_blank" rel="noopener" class="btn-cta" style="animation:none">
+    🚀 Попробовать бесплатно прямо сейчас
+  </a>
+  <div class="cta-or">или</div>
+  <a href="https://buy.stripe.com/bJeeVdbdi9T1fHheZ9aVa00" target="_blank" rel="noopener" class="btn-gold">
+    💰 Хочу безлимит за $19/мес
+  </a>
+
+  <div class="trust-line">
+    <span>🔒 Безопасная оплата Stripe</span>
+    <span>↩ Возврат 14 дней</span>
+    <span>⚡ Мгновенный доступ</span>
+    <span>❌ Без скрытых платежей</span>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<!-- FOOTER -->
+<footer>
+  RepurposeFlow AI v0.3 &nbsp;·&nbsp; Powered by <a href="https://groq.com" target="_blank" rel="noopener">Groq</a> &nbsp;·&nbsp; Запущен 24 марта 2026 &nbsp;·&nbsp;
+  <a href="https://github.com/romanyukzhenya82-sketch/repurposeflow-ai/tree/main" target="_blank" rel="noopener">GitHub</a>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.sr').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
